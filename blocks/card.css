@@ -1,22 +1,28 @@
 .card{
-    width: 288px;
+    width: 413px;
 }
 
 .card__content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 20px;
-    line-height: 24px;
 }
 
 .card__image {
-    width: 288px;
+    width: 413px;
     height: 413px;
     object-fit: cover;
     display: block;
     margin: 0;
     border-radius: 8px;
+}
+
+.card__title{
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 

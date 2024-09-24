@@ -18,6 +18,9 @@
 
 .profile__name{
     margin: 0 0 12px;
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-style: normal;
     font-size: 32px;
     line-height: 1;
     color: #212121;
@@ -31,6 +34,9 @@
  margin: 0;   
  color: #212121;
  opacity: 70%;
+ font-family: Poppins, Arial, Helvetica, sans-serif;
+ font-style: normal;
+ font-weight: 500;
  font-size: 16px;
  line-height: 16px;
  text-overflow: ellipsis;
