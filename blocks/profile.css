@@ -50,6 +50,7 @@
 
 
 .profile__edit-btn{
+    font-family: Poppins, Arial, Helvetica, sans-serif;
     margin-top: auto;
     width: 115px;
     height: 16px;
@@ -63,6 +64,7 @@
 }
 
 .profile__add-btn{
+    font-family: Poppins, Arial, Helvetica, sans-serif;
     margin-left: auto;
     margin-top: auto;
     padding: 0;
