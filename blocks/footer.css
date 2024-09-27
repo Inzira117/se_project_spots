@@ -1,16 +1,15 @@
-.footer{
-    border-top: 1px rgba(33,33,33, .4) solid;
-    padding: 34px 0 20px;
-    display: flex;
-    justify-content: center;
+.footer {
+  padding: 34px 20px;
+  display: flex;
+  justify-content: center;
 }
 
-.footer__content{
-    text-align: center;
-    font-family: Poppins, Arial, Helvetica, sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 16px;
-    color: #212121;
-    opacity: 70%;
+.footer__content {
+  text-align: center;
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  color: #212121;
+  opacity: 70%;
 }

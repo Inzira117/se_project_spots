@@ -18,4 +18,5 @@ This is the third project of the Software Engineering program at TripleTen. It w
   
 #### GitHub
 
-*[link to the project on GitHub] (git@github.com:Inzira117/se_project_spots.git)
+*[link to the project on GitHub] [git@github.com:Inzira117/se_project_spots.git]
+(https://inzira117.github.io/se_project_spots/)
