@@ -62,9 +62,6 @@
 
   .card__content {
     width: 288px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin: 0;
     padding: 0;
   }
