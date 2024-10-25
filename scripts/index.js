@@ -50,8 +50,8 @@ const editModalDescriptionInput = editModal.querySelector(
 
 const cardModal = document.querySelector("#add-card-modal");
 const cardModalCloseBtn = cardModal.querySelector(".modal__close-btn");
-const cardLinkInput = cardModal.querySelector("add-card-link-input");
-const cardNameInput = cardModal.querySelector("add-card-name-input");
+const cardLinkInput = cardModal.querySelector("#add-card-link-input");
+const cardNameInput = cardModal.querySelector("#add-card-name-input");
 
 const previewModal = document.querySelector("#preview-modal");
 const previewModalImageEl = previewModal.querySelector(".modal__image");
@@ -123,6 +123,16 @@ function handleCardFormSubmit(evt) {
   const cardEl = getCardElement(inputValue);
   cardsList.prepend(cardEl);
   closeModal(cardModal);
+}
+
+function handleCardFormSubmit(evt) {
+  evt.preventDefault();
+  const inputValue = { name: cardNameInput.value, link: cardLinkInput.value };
+  const cardEl = getCardElement(inputValue);
+  cardsList.prepend(cardEl);
+  closeModal(cardModal);
+  cardNameInput.value = "";
+  cardLinkInput.value = "";
 }
 
 profEditModal.addEventListener("click", () => {
