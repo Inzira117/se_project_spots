@@ -109,6 +109,23 @@
   border: 1px solid #212121;
 }
 
+.modal__input_type_error {
+  border: 1px solid #ff0000b2;
+}
+
+.modal__error {
+  display: block;
+  color: #ff0000b2;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 17.6px;
+  text-align: left;
+  width: 630px;
+  gap: 0px;
+  opacity: 0px;
+}
+
 .modal__submit-btn {
   width: 156px;
   height: 52px;
@@ -124,6 +141,10 @@
 
 .modal__submit-btn:hover {
   opacity: 80%;
+}
+
+.modal__submit-btn-disabled {
+  opacity: 50%;
 }
 
 .modal__image {
