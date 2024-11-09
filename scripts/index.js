@@ -56,6 +56,7 @@ const cardSubmitBtn = cardModal.querySelector(".modal__submit-btn");
 const cardModalCloseBtn = cardModal.querySelector(".modal__close-btn");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
+const modal = document.querySelectorAll(".modal");
 
 // Previev image elements
 const previewModal = document.querySelector("#preview-modal");
@@ -114,6 +115,31 @@ function openModal(modal) {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+}
+
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeModalEsc);
+  modal.removeEventListener("mousedown", closeOverlay);
+}
+
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closeModalEsc);
+  modal.addEventListener("mousedown", closeOverlay);
+}
+
+function closeOverlay(e) {
+  if (e.target.classList.contains("modal")) {
+    closePopup(e.target);
+  }
+}
+
+function closeModalEsc(e) {
+  if (e.key === "Escape") {
+    const modalOpened = document.querySelector(".modal_opened");
+    closePopup(modalOpened);
+  }
 }
 
 function handleEditFormSubmit(evt) {
