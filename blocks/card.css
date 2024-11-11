@@ -51,11 +51,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  width: 353px;
+  height: 25px;
 }
 
 .card__like-btn {
   background: transparent url(../images/like-icon.svg) center no-repeat;
-  width: 23px;
+  background-repeat: no-repeat;
+  width: 22px;
   height: 20px;
   padding: 0;
   margin: 0;
@@ -71,6 +74,7 @@
 .card__like-btn_liked {
   background: url(../images/liked-icon.svg);
   opacity: 1;
+  
 }
 
 .card__like-btn_liked:hover {
@@ -101,6 +105,8 @@
   .card__title {
     font-size: 16px;
     line-height: 1;
+    width: 288px;
+    height: 18px;
   }
 
   .card__delete-btn {

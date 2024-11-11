@@ -56,7 +56,7 @@ const cardSubmitBtn = cardModal.querySelector(".modal__submit-btn");
 const cardModalCloseBtn = cardModal.querySelector(".modal__close-btn");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
-const modal = document.querySelectorAll(".modal");
+const modals = document.querySelectorAll(".modal");
 
 // Previev image elements
 const previewModal = document.querySelector("#preview-modal");
@@ -109,15 +109,7 @@ function getCardElement(data) {
   return cardElement;
 }
 
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-}
-
 function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-}
-
-function closePopup(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeModalEsc);
   modal.removeEventListener("mousedown", closeOverlay);
@@ -131,14 +123,14 @@ function openModal(modal) {
 
 function closeOverlay(e) {
   if (e.target.classList.contains("modal")) {
-    closePopup(e.target);
+    closeModal(e.target);
   }
 }
 
 function closeModalEsc(e) {
   if (e.key === "Escape") {
     const modalOpened = document.querySelector(".modal_opened");
-    closePopup(modalOpened);
+    closeModal(modalOpened);
   }
 }
 
@@ -155,8 +147,6 @@ function handleCardFormSubmit(evt) {
   const cardEl = getCardElement(inputValue);
   cardsList.prepend(cardEl);
   closeModal(cardModal);
-  cardNameInput.value = "";
-  cardLinkInput.value = "";
   evt.target.reset();
   disabledButton(cardSubmitBtn, settings);
 }
@@ -164,7 +154,11 @@ function handleCardFormSubmit(evt) {
 profileModalOpenButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
-  resetValidation(editModal, [editModalNameInput, editModalDescriptionInput]);
+  resetValidation(
+    editModal,
+    [editModalNameInput, editModalDescriptionInput],
+    settings
+  );
   openModal(editModal);
 });
 
@@ -188,8 +182,7 @@ editFormElement.addEventListener("submit", handleEditFormSubmit);
 cardFormElement.addEventListener("submit", handleCardFormSubmit);
 
 initialCards.forEach((item) => {
-  const cardElement = getCardElement(item);
-  cardsList.append(cardElement);
+  renderCard(item, "append");
 });
 
 function renderCard(item, method = "prepend") {
