@@ -112,4 +112,8 @@
   .card__delete-btn {
     right: 10px;
   }
+
+  .card__like-btn {
+    width: 24px;
+  }
 }
