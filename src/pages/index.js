@@ -1,3 +1,6 @@
+import "./index.css";
+import {enableValidation, settings, resetValidation, showInputError} from "../scripts/validation.js";
+
 const initialCards = [
   {
     name: "Golden Gate bridge",
@@ -56,7 +59,7 @@ const cardSubmitBtn = cardModal.querySelector(".modal__submit-btn");
 const cardModalCloseBtn = cardModal.querySelector(".modal__close-btn");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
-const modals = document.querySelectorAll(".modal");
+
 
 // Previev image elements
 const previewModal = document.querySelector("#preview-modal");
@@ -188,3 +191,8 @@ function renderCard(item, method = "prepend") {
   const cardElement = getCardElement(item);
   cardsList[method](cardElement);
 }
+
+enableValidation(settings);
+showInputError(formElement, inputElement, errorMsg, config);
+
+
