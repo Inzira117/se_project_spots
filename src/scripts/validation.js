@@ -10,7 +10,7 @@ export const settings = {
 export const showInputError = (formElement, inputElement, errorMsg, config) => {
   const errorMsgID = inputElement.id + "-error";
   const errorMsgEl = formElement.querySelector("#" + errorMsgID);
-  errorMsgEl.textContent = errorMsg;
+  errorMsgEl.classList.add(config.errorClass);
   inputElement.classList.add(config.inputErrorClass);
 };
 
@@ -18,6 +18,7 @@ const hideInputError = (formElement, inputElement, config) => {
   const errorMsgID = inputElement.id + "-error";
   const errorMsgEl = formElement.querySelector("#" + errorMsgID);
   errorMsgEl.textContent = "";
+  errorMsgEl.classList.remove(config.errorClass);
   inputElement.classList.remove(config.inputErrorClass);
 };
 

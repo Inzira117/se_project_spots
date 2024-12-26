@@ -49,19 +49,17 @@ const api = new Api({
 
 api
 .getAppInfo()
-.then(([cards]) => {
+.then(([cards, user]) => {
   cards.forEach((item) => {
     renderCard(item, "append");
   });
-})
-//destructure the second item in the callback of the .then()
-//handle the users info
-//set the src of the avatar image, set the textContent of both text elements
-.then((user) => {
   document.getElementById('user-name').textContent = user.name;
   document.getElementById('user-about').textContent = user.about;
   document.getElementById('user-avatar').src = user.avatar;
 })
+//destructure the second item in the callback of the .then()
+//handle the users info
+//set the src of the avatar image, set the textContent of both text elements
 .catch(console.error);
 
 
@@ -223,6 +221,6 @@ function renderCard(item, method = "prepend") {
 }
 
 enableValidation(settings);
-showInputError(formElement, inputElement, errorMsg, config);
+//showInputError(formElement, inputElement, errorMsg, config);
 
 

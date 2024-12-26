@@ -126,6 +126,10 @@
   opacity: 0px;
 }
 
+.modal__error_visible {
+  opacity: 1;
+}
+
 .modal__submit-btn {
   width: 156px;
   height: 52px;
