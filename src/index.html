@@ -16,19 +16,21 @@
       </header>
       <main class="content">
         <section class="profile page__section">
+          <button class="profile__avatar-btn"></button>
           <img
             src="<%=require('./images/avatar.jpg')%>"
             alt="Bessie Coleman"
             class="profile__avatar"
           />
           <div class="profile__column">
-            <h1 class="profile__name">Bessie Coleman</h1>
-            <p class="profile__description">Civil aviator</p>
+            <h1 class="profile__name" id="user-name">Bessie Coleman</h1>
+            <p class="profile__description" id="user-about">Civil aviator</p>
             <button type="button" class="profile__edit-btn">
               <img
                 src="<%=require('./images/edit-btn.svg')%>"
                 alt="pencil icon"
                 class="profile__icon"
+                id="user-avatar"
               />
               Edit Profile
             </button>
