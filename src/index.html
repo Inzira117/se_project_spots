@@ -16,12 +16,21 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <button class="profile__avatar-btn"></button>
+          <div class="profile__avatar-container">
+          <button class="profile__avatar-btn">
+            <img
+            src="<%=require('./images/Edit-avatar.png')%>"
+            alt="Pencil icon"
+            class="profile__pencil-icon"
+          />
+          </button>
           <img
             src="<%=require('./images/avatar.jpg')%>"
             alt="Bessie Coleman"
             class="profile__avatar"
+            id="user-avatar"
           />
+         </div>
           <div class="profile__column">
             <h1 class="profile__name" id="user-name">Bessie Coleman</h1>
             <p class="profile__description" id="user-about">Civil aviator</p>
@@ -152,6 +161,44 @@
         <p class="modal__caption">Val Thorens</p>
       </div>
     </div>
-    
+    <div class="modal" id="avatar-modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
+        <h3 class="modal__title">Edit profile avatar</h2>
+     <form class="modal__form" id="edit-avatar-form">
+      <label for="profile-avatar-input" class="modal__label">
+        Profile picture
+        <input
+          id="profile-avatar-input"
+          class="modal__input"
+          name="avatar"
+          placeholder="Paste the link to an image"
+          required
+        />
+        <span id="profile-avatar-input-error" class="modal__error"></span>
+        </label>
+      <button type="submit" class="modal__submit-btn">Save</button>
+     </form>
+    </div>
+    <div class="modal" id="avatar-modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-btn" aria-label="Close modal"></button>
+        <h3 class="modal__title">Edit profile avatar</h2>
+     <form class="modal__form" id="edit-avatar-form">
+      <label for="profile-avatar-input" class="modal__label">
+        Profile picture
+        <input
+          id="profile-edit-avatar-input"
+          class="modal__input"
+          name="avatar"
+          placeholder="Paste the link to an image"
+          type="url"
+          required
+        />
+        <span id="profile-avatar-input-error" class="modal__error"></span>
+        </label>
+      <button type="submit" class="modal__submit-btn">Save</button>
+     </form>
+    </div>
   </body>
 </html>

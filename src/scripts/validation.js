@@ -10,6 +10,7 @@ export const settings = {
 export const showInputError = (formElement, inputElement, errorMsg, config) => {
   const errorMsgID = inputElement.id + "-error";
   const errorMsgEl = formElement.querySelector("#" + errorMsgID);
+  errorMsgEl.textContent = errorMsg;
   errorMsgEl.classList.add(config.errorClass);
   inputElement.classList.add(config.inputErrorClass);
 };
@@ -50,7 +51,7 @@ const toggleButtonState = (inputList, buttonElement, config) => {
   }
 };
 
-const disabledButton = (buttonElement, config) => {
+export const disabledButton = (buttonElement, config) => {
   buttonElement.disabled = true;
   buttonElement.classList.add(config.inactiveButtonClass);
 };

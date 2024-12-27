@@ -1,5 +1,5 @@
 import "./index.css";
-import {enableValidation, settings, resetValidation, showInputError} from "../scripts/validation.js";
+import {enableValidation, settings, resetValidation, showInputError, disabledButton} from "../scripts/validation.js";
 import Api from "../utils/api.js";
 
 // const initialCards = [
@@ -65,7 +65,6 @@ api
 
 // Profile elements
 const profileModalOpenButton = document.querySelector(".profile__edit-btn");
-const cardModalOpenButton = document.querySelector(".profile__add-btn");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
@@ -80,10 +79,19 @@ const editModalDescriptionInput = editModal.querySelector(
 
 // Card form elements
 const cardModal = document.querySelector("#add-card-modal");
+const cardModalOpenButton = document.querySelector(".profile__add-btn");
 const cardSubmitBtn = cardModal.querySelector(".modal__submit-btn");
 const cardModalCloseBtn = cardModal.querySelector(".modal__close-btn");
 const cardLinkInput = cardModal.querySelector("#add-card-link-input");
 const cardNameInput = cardModal.querySelector("#add-card-name-input");
+
+// Avatar form elements
+const avatarModalOpenButton = document.querySelector(".profile__avatar-btn");
+const avatarModal = document.querySelector("#avatar-modal");
+const avatarFormElement = avatarModal.querySelector(".modal__form");
+const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
+const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
+const avatarInput = avatarModal.querySelector("#profile-edit-avatar-input");
 
 
 // Previev image elements
@@ -181,7 +189,25 @@ function handleCardFormSubmit(evt) {
   renderCard(inputValue);
   closeModal(cardModal);
   evt.target.reset();
-  disabledButton(cardSubmitBtn, settings);
+  disabledButton(avatarSubmitBtn, settings);
+}
+
+
+function handleAvatarFormSubmit(evt) {
+  evt.preventDefault();
+
+  api
+  .editAvatarInfo(avatarInput.value)
+  .then((data) => {
+    //TODO make this work
+    console.log(avatarInput.value);
+    const avatarImage = {data: avatarInput.value}
+    avatarImage.src = data.avatar; 
+    closeModal(avatarModal); 
+    evt.target.reset();
+    disabledButton(avatarSubmitBtn, settings);
+  })
+  .catch(console.error);
 }
 
 profileModalOpenButton.addEventListener("click", () => {
@@ -203,6 +229,7 @@ cardModalOpenButton.addEventListener("click", () => {
   openModal(cardModal);
 });
 
+
 cardModalCloseBtn.addEventListener("click", () => {
   closeModal(cardModal);
 });
@@ -211,8 +238,19 @@ previevCloseBtn.addEventListener("click", () => {
   closeModal(previewModal);
 });
 
+avatarModalOpenButton.addEventListener("click", () => {
+  openModal(avatarModal);
+});
+
+avatarModalCloseBtn.addEventListener("click", () => {
+  closeModal(avatarModal);
+});
+
+
+
 editFormElement.addEventListener("submit", handleEditFormSubmit);
 cardFormElement.addEventListener("submit", handleCardFormSubmit);
+avatarFormElement.addEventListener("submit", handleAvatarFormSubmit);
 
 
 function renderCard(item, method = "prepend") {
@@ -221,6 +259,6 @@ function renderCard(item, method = "prepend") {
 }
 
 enableValidation(settings);
-//showInputError(formElement, inputElement, errorMsg, config);
+
 
 
