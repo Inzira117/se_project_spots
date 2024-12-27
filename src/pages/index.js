@@ -199,9 +199,7 @@ function handleAvatarFormSubmit(evt) {
   api
   .editAvatarInfo(avatarInput.value)
   .then((data) => {
-    //TODO make this work
-    console.log(avatarInput.value);
-    const avatarImage = {data: avatarInput.value}
+    const avatarImage = document.getElementById('profile-edit-avatar-input'); // Ensure this ID matches your HTML
     avatarImage.src = data.avatar; 
     closeModal(avatarModal); 
     evt.target.reset();
