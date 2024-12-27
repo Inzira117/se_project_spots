@@ -1,5 +1,9 @@
 import "./index.css";
-import {enableValidation, settings, resetValidation, showInputError, disabledButton} from "../scripts/validation.js";
+import {
+  enableValidation,
+  settings,
+  resetValidation,
+} from "../scripts/validation.js";
 import Api from "../utils/api.js";
 
 // const initialCards = [
@@ -42,26 +46,26 @@ import Api from "../utils/api.js";
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "08432b6e-f3d8-4db4-affe-694e15f2b38a",
-    "Content-Type": "application/json"
-  }
+    authorization: "3b2e2121-8c57-411a-855f-0d4b0fcfc9ae",
+    "Content-Type": "application/json",
+  },
 });
 
 api
-.getAppInfo()
-.then(([cards, user]) => {
-  cards.forEach((item) => {
-    renderCard(item, "append");
-  });
-  document.getElementById('user-name').textContent = user.name;
-  document.getElementById('user-about').textContent = user.about;
-  document.getElementById('user-avatar').src = user.avatar;
-})
-//destructure the second item in the callback of the .then()
-//handle the users info
-//set the src of the avatar image, set the textContent of both text elements
-.catch(console.error);
-
+  .getAppInfo()
+  .then(([cards, user]) => {
+    cards.forEach((item) => {
+      const cardElement = getCardElement(item);
+      cardsList.append(cardElement);
+    });
+    document.getElementById("user-name").textContent = user.name;
+    document.getElementById("user-about").textContent = user.about;
+    document.getElementById("user-avatar").src = user.avatar;
+  })
+  //destructure the second item in the callback of the .then()
+  //handle the users info
+  //set the src of the avatar image, set the textContent of both text elements
+  .catch(console.error);
 
 // Profile elements
 const profileModalOpenButton = document.querySelector(".profile__edit-btn");
@@ -91,8 +95,10 @@ const avatarModal = document.querySelector("#avatar-modal");
 const avatarFormElement = avatarModal.querySelector(".modal__form");
 const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
-const avatarInput = avatarModal.querySelector("#profile-edit-avatar-input");
+const avatarInput = avatarModal.querySelector("#profile-avatar-input");
 
+//Delete form elements
+const deleteModal = document.querySelector("#delete-modal");
 
 // Previev image elements
 const previewModal = document.querySelector("#preview-modal");
@@ -118,7 +124,7 @@ function getCardElement(data) {
 
   const cardLikeBtn = cardElement.querySelector(".card__like-btn");
 
-  const cardDeleteBtn = cardElement.querySelector(".card__delete-btn");
+  const deleteButton = cardElement.querySelector(".card__delete-btn");
 
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__like-btn_liked");
@@ -131,9 +137,11 @@ function getCardElement(data) {
     previewModalCaptionEl.textContent = data.name;
   });
 
-  cardDeleteBtn.addEventListener("click", () => {
+  /*cardDeleteBtn.addEventListener("click", () => {
     cardElement.remove();
-  });
+  });*/
+
+  deleteButton.addEventListener("click", handleDeleteCard);
 
   cardNameEl.textContent = data.name;
 
@@ -172,40 +180,52 @@ function closeModalEsc(e) {
 function handleEditFormSubmit(evt) {
   evt.preventDefault();
 
-  api 
-  .editUserInfo({name:editModalNameInput.value, about:editModalDescriptionInput.value})
-  .then((data) => {
-    // TODO Use data el instead of input values
-    profileName.textContent = data.name;
-    profileDescription.textContent = data.about;
-    closeModal(editModal);
-  })
-  .catch(console.error);
+  api
+    .editUserInfo({
+      name: editModalNameInput.value,
+      about: editModalDescriptionInput.value,
+    })
+    .then((data) => {
+      // TODO Use data el instead of input values
+      profileName.textContent = data.name;
+      profileDescription.textContent = data.about;
+      closeModal(editModal);
+    })
+    .catch(console.error);
 }
 
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
   const inputValue = { name: cardNameInput.value, link: cardLinkInput.value };
-  renderCard(inputValue);
-  closeModal(cardModal);
-  evt.target.reset();
-  disabledButton(avatarSubmitBtn, settings);
+  api
+    .addNewCard(inputValue)
+    .then(() => {
+      renderCard(inputValue);
+      closeModal(cardModal);
+      evt.target.reset();
+      disabledButton(avatarSubmitBtn, settings);
+    })
+    .catch(console.error);
 }
-
 
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
 
   api
-  .editAvatarInfo(avatarInput.value)
-  .then((data) => {
-    const avatarImage = document.getElementById('profile-edit-avatar-input'); // Ensure this ID matches your HTML
-    avatarImage.src = data.avatar; 
-    closeModal(avatarModal); 
-    evt.target.reset();
-    disabledButton(avatarSubmitBtn, settings);
-  })
-  .catch(console.error);
+    .editAvatarInfo(avatarInput.value)
+    .then((data) => {
+      const avatarImage = document.getElementById("profile-avatar-input");
+      avatarImage.src = data.avatar;
+      closeModal(avatarModal);
+      evt.target.reset();
+      disabledButton(avatarSubmitBtn, settings);
+    })
+    .catch(console.error);
+}
+
+function handleDeleteCard(evt) {
+  evt.preventDefault();
+  openModal(deleteModal);
 }
 
 profileModalOpenButton.addEventListener("click", () => {
@@ -227,7 +247,6 @@ cardModalOpenButton.addEventListener("click", () => {
   openModal(cardModal);
 });
 
-
 cardModalCloseBtn.addEventListener("click", () => {
   closeModal(cardModal);
 });
@@ -244,12 +263,9 @@ avatarModalCloseBtn.addEventListener("click", () => {
   closeModal(avatarModal);
 });
 
-
-
 editFormElement.addEventListener("submit", handleEditFormSubmit);
 cardFormElement.addEventListener("submit", handleCardFormSubmit);
 avatarFormElement.addEventListener("submit", handleAvatarFormSubmit);
-
 
 function renderCard(item, method = "prepend") {
   const cardElement = getCardElement(item);
@@ -257,6 +273,3 @@ function renderCard(item, method = "prepend") {
 }
 
 enableValidation(settings);
-
-
-

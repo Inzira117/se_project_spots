@@ -60,3 +60,5 @@ module.exports = {
     new MiniCssExtractPlugin(),
   ],
 };
+
+

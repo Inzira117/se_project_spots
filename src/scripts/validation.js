@@ -7,7 +7,7 @@ export const settings = {
   errorClass: "modal__error_visible",
 };
 
-export const showInputError = (formElement, inputElement, errorMsg, config) => {
+const showInputError = (formElement, inputElement, errorMsg, config) => {
   const errorMsgID = inputElement.id + "-error";
   const errorMsgEl = formElement.querySelector("#" + errorMsgID);
   errorMsgEl.textContent = errorMsg;
@@ -51,7 +51,7 @@ const toggleButtonState = (inputList, buttonElement, config) => {
   }
 };
 
-export const disabledButton = (buttonElement, config) => {
+const disabledButton = (buttonElement, config) => {
   buttonElement.disabled = true;
   buttonElement.classList.add(config.inactiveButtonClass);
 };
@@ -67,7 +67,7 @@ const setEventListener = (formElement, config) => {
     formElement.querySelectorAll(config.inputSelector)
   );
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
-
+  console.log(buttonElement);
   toggleButtonState(inputList, buttonElement, config);
 
   inputList.forEach((inputElement) => {
@@ -85,4 +85,4 @@ export const enableValidation = (config) => {
   });
 };
 
-
+enableValidation(settings);
