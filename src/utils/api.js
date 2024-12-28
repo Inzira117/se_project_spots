@@ -26,9 +26,7 @@ class Api {
   addNewCard({ name, link }) {
     return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
       method: "POST",
-      headers: {
-        authorization: "3b2e2121-8c57-411a-855f-0d4b0fcfc9ae",
-      },
+      headers: this._headers,
       body: JSON.stringify({ name, link }),
     }).then(this.checkResponse);
   }
@@ -59,6 +57,20 @@ class Api {
       body: JSON.stringify({
         avatar,
       }),
+    }).then(this.checkResponse);
+  }
+
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this.checkResponse);
+  }
+
+  changeLikeStatus(id, isLiked) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: isLiked ? "DELETE" : "PUT",
+      headers: this._headers,
     }).then(this.checkResponse);
   }
 }
