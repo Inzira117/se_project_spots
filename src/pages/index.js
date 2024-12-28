@@ -3,45 +3,9 @@ import {
   enableValidation,
   settings,
   resetValidation,
+  disabledButton,
 } from "../scripts/validation.js";
 import Api from "../utils/api.js";
-
-// const initialCards = [
-//   {
-//     name: "Golden Gate bridge",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
-//   },
-
-//   {
-//     name: "Val Thorens",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-//   },
-
-//   {
-//     name: "Restaurant terrace",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-//   },
-
-//   {
-//     name: "An outdoor cafe",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-//   },
-
-//   {
-//     name: "A very long bridge, over the forest and through the trees",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-//   },
-
-//   {
-//     name: "Tunnel with morning light",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-//   },
-
-//   {
-//     name: "Mountain house",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-//   },
-// ];
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -62,9 +26,6 @@ api
     document.getElementById("user-about").textContent = user.about;
     document.getElementById("user-avatar").src = user.avatar;
   })
-  //destructure the second item in the callback of the .then()
-  //handle the users info
-  //set the src of the avatar image, set the textContent of both text elements
   .catch(console.error);
 
 // Profile elements
@@ -118,6 +79,8 @@ const cardFormElement = cardModal.querySelector(".modal__form");
 
 let selectedCard;
 let selectedCardId;
+
+//Functions
 
 function getCardElement(data) {
   const cardElement = cardTemplate.content
@@ -282,6 +245,8 @@ function handleDeleteCard(cardElement, data) {
   selectedCardId = data._id;
   openModal(deleteModal);
 }
+
+//EventListeners
 
 profileModalOpenButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
