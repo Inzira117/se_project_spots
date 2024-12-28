@@ -140,16 +140,23 @@
     align-items: center;
     text-align: center;
     padding-top: 20px;
+    display: block;
   }
 
   .profile__avatar-container {
     margin: 0 0 20px;
+  }
+  .profile__avatar {
     width: 80px;
     height: 80px;
+    align-items: center;
   }
 
   .profile__avatar-btn {
     visibility: visible;
+    width: 80px;
+    height: 80px;
+    left: 99px;
   }
 
   .profile__pencil-icon {
@@ -159,6 +166,7 @@
     height: 15px;
     border-radius: 6px;
     padding: 4px;
+    align-items: center;
   }
 
   .profile__avatar-btn::after {

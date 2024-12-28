@@ -187,8 +187,8 @@ function handleCardFormSubmit(evt) {
   const inputValue = { name: cardNameInput.value, link: cardLinkInput.value };
   api
     .addNewCard(inputValue)
-    .then(() => {
-      renderCard(inputValue);
+    .then((res) => {
+      renderCard(res);
       closeModal(cardModal);
       evt.target.reset();
       disabledButton(avatarSubmitBtn, settings);
@@ -208,7 +208,7 @@ function handleAvatarFormSubmit(evt) {
   api
     .editAvatarInfo(avatarInput.value)
     .then((data) => {
-      const avatarImage = document.getElementById("profile-avatar-input");
+      const avatarImage = document.getElementById("user-avatar");
       avatarImage.src = data.avatar;
       closeModal(avatarModal);
       evt.target.reset();
