@@ -1,4 +1,4 @@
-const settings = {
+export const settings = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__submit-btn",
@@ -11,6 +11,7 @@ const showInputError = (formElement, inputElement, errorMsg, config) => {
   const errorMsgID = inputElement.id + "-error";
   const errorMsgEl = formElement.querySelector("#" + errorMsgID);
   errorMsgEl.textContent = errorMsg;
+  errorMsgEl.classList.add(config.errorClass);
   inputElement.classList.add(config.inputErrorClass);
 };
 
@@ -18,6 +19,7 @@ const hideInputError = (formElement, inputElement, config) => {
   const errorMsgID = inputElement.id + "-error";
   const errorMsgEl = formElement.querySelector("#" + errorMsgID);
   errorMsgEl.textContent = "";
+  errorMsgEl.classList.remove(config.errorClass);
   inputElement.classList.remove(config.inputErrorClass);
 };
 
@@ -49,12 +51,12 @@ const toggleButtonState = (inputList, buttonElement, config) => {
   }
 };
 
-const disabledButton = (buttonElement, config) => {
+export const disabledButton = (buttonElement, config) => {
   buttonElement.disabled = true;
   buttonElement.classList.add(config.inactiveButtonClass);
 };
 
-const resetValidation = (formElement, inputList, config) => {
+export const resetValidation = (formElement, inputList, config) => {
   inputList.forEach((input) => {
     hideInputError(formElement, input, config);
   });
@@ -65,7 +67,7 @@ const setEventListener = (formElement, config) => {
     formElement.querySelectorAll(config.inputSelector)
   );
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
-
+  console.log(buttonElement);
   toggleButtonState(inputList, buttonElement, config);
 
   inputList.forEach((inputElement) => {
@@ -76,7 +78,7 @@ const setEventListener = (formElement, config) => {
   });
 };
 
-const enableValidation = (config) => {
+export const enableValidation = (config) => {
   const formList = document.querySelectorAll(config.formSelector);
   formList.forEach((formElement) => {
     setEventListener(formElement, config);
