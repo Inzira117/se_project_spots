@@ -57,6 +57,7 @@ const avatarFormElement = avatarModal.querySelector(".modal__form");
 const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close-btn");
 const avatarInput = avatarModal.querySelector("#profile-avatar-input");
+const avatarImage = document.getElementById("user-avatar");
 
 //Delete form elements
 const deleteModal = document.querySelector("#delete-modal");
@@ -191,7 +192,7 @@ function handleCardFormSubmit(evt) {
       renderCard(res);
       closeModal(cardModal);
       evt.target.reset();
-      disabledButton(avatarSubmitBtn, settings);
+      disabledButton(cardSubmitBtn, settings);
     })
     .catch(console.error)
     .finally(() => {
@@ -208,11 +209,10 @@ function handleAvatarFormSubmit(evt) {
   api
     .editAvatarInfo(avatarInput.value)
     .then((data) => {
-      const avatarImage = document.getElementById("user-avatar");
       avatarImage.src = data.avatar;
       closeModal(avatarModal);
       evt.target.reset();
-      disabledButton(avatarSubmitBtn, settings);
+      disabledButton(submitBtn, settings);
     })
     .catch(console.error)
     .finally(() => {
