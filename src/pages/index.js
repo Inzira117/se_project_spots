@@ -22,9 +22,13 @@ api
       const cardElement = getCardElement(item);
       cardsList.append(cardElement);
     });
-    document.getElementById("user-name").textContent = user.name;
-    document.getElementById("user-about").textContent = user.about;
-    document.getElementById("user-avatar").src = user.avatar;
+    // document.getElementById("user-name").textContent = user.name;
+    // document.getElementById("user-about").textContent = user.about;
+    // document.getElementById("user-avatar").src = user.avatar;
+
+    profileName.textContent = user.name;
+    profileDescription.textContent = user.about;
+    profileAvatar.src = user.avatar;
   })
   .catch(console.error);
 
@@ -32,6 +36,7 @@ api
 const profileModalOpenButton = document.querySelector(".profile__edit-btn");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
+const profileAvatar = document.getElementById("user-avatar");
 
 // Edit form elements
 const editModal = document.querySelector("#edit-modal");

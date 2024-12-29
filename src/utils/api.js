@@ -17,9 +17,7 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: "3b2e2121-8c57-411a-855f-0d4b0fcfc9ae",
-      },
+      headers: this._headers,
     }).then(this.checkResponse);
   }
 
